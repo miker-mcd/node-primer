@@ -9,4 +9,24 @@ const app = express();
 
 const port = 8000;
 
+// Use body-parser to process URL encoded forms
+app.use(bodyParser.urlencoded({ extended: true }));
+
+require('./app/routes')(app, {});
+
 app.listen(port);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
