@@ -39,6 +39,20 @@ module.exports = function (app, myDB) {
     });
   });
 
+  // UPDATE an entry
+  app.put('/entries/:id', function (req, res) {
+    const id = req.params.id;
+    const details = { '_id': new ObjectID(id) };
+    const entry = { text: req.body.body, title: req.body.title };
+    myDB.collection('entries').update(details, entry, function (err, result) {
+      if (err) {
+        res.send({'error': 'An error has occurred'})
+      } else {
+        res.send(entry);
+      }
+    });
+  });
+
   // DELETE an entry
   app.delete('/entries/:id', function (req, res) {
     const id = req.params.id;
