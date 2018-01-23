@@ -38,6 +38,20 @@ module.exports = function (app, myDB) {
       }
     });
   });
+
+  // DELETE an entry
+  app.delete('/entries/:id', function (req, res) {
+    const id = req.params.id;
+    const details = { '_id': new ObjectID(id) };
+    myDB.collection('entries').remove(details, function (err, item) {
+      if (err) {
+        res.send({ 'error': 'An error has occurred' });
+      } else {
+        res.send('Note ' + id + ' deleted!');
+      }
+    });
+  });
+
 };
 
 
